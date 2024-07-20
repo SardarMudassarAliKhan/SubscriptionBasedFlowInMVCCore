@@ -1,10 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SubscriptionBasedFlowInMVCCore.Models;
 
 namespace SubscriptionBasedFlowInMVCCore.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+
+        }
+
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<SubscriptionFeature> SubscriptionFeatures { get; set; }
 

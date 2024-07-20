@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SubscriptionBasedFlowInMVCCore.Data;
+using SubscriptionBasedFlowInMVCCore.Models;
 
 namespace SubscriptionBasedFlowInMVCCore
 {
@@ -11,6 +12,8 @@ namespace SubscriptionBasedFlowInMVCCore
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
              options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -45,6 +48,7 @@ namespace SubscriptionBasedFlowInMVCCore
             app.UseStaticFiles();
 
             app.UseRouting();
+
 
             app.UseAuthentication();
             app.UseAuthorization();

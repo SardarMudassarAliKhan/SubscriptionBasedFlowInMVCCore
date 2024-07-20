@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Subscription Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var subscription = ViewBag.Subscription as Subscription;
+    var features = ViewBag.Features as List<SubscriptionFeature>;
+}
+
+<h2>Subscription Details</h2>
+
+<p><strong>Subscription Type:</strong> @subscription.SubscriptionType</p>
+<p><strong>Start Date:</strong> @subscription.StartDate.ToShortDateString()</p>
+<p><strong>End Date:</strong> @subscription.EndDate.ToShortDateString()</p>
+
+<h3>Features</h3>
+<ul>
+    @foreach (var feature in features)
+    {
+        <li>@feature.FeatureName</li>
+    }
+</ul>
